@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from '../state/store'
-import { getImages } from '../state/gallery/gallerySlice'
+import { getImages, getImage } from '../state/gallery/gallerySlice'
 import ImageCard from '../components/ImageCard'
 
 const Gallery = () => {
@@ -18,9 +18,22 @@ const Gallery = () => {
         }
     }
 
+    const handleClickOne = async () => {
+        try {
+            const response = await dispatch(
+                getImage('66e7754974319f510e39d50b')
+            )
+            alert('got it! ')
+            console.log('Fetched Images:', response)
+        } catch (error) {
+            console.error('Error fetching images:', error)
+        }
+    }
+
     return (
         <div>
             <button onClick={handleClick}>Get Images</button>
+            <button onClick={handleClickOne}>Get Image</button>
             {loading && <p>Loading images...</p>}
             {error && <p>Error fetching images!</p>}
             {images.length > 0 && (
