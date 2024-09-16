@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { getPhotos } from './api'
 
 interface GalleryState {
     images: string[]
@@ -37,20 +38,8 @@ const gallerySlice = createSlice({
 })
 
 export const getImages = createAsyncThunk('gallery/getImages', async () => {
-    try {
-        const response = await fetch('http://localhost:8000/photos')
-        // test a pending request:
-        // await new Promise((resolve) => setTimeout(resolve, 2000))
-
-        const data = await response.json()
-        return data.photos
-    } catch (error: unknown) {
-        if (error instanceof Error) {
-            return Promise.reject(error.message)
-        } else {
-            return Promise.reject('An unexpected error occurred.')
-        }
-    }
+    const photos = await getPhotos()
+    return photos
 })
 
 export default gallerySlice.reducer
