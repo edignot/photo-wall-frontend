@@ -25,10 +25,12 @@ const gallerySlice = createSlice({
             .addCase(
                 getImages.fulfilled,
                 (state, action: PayloadAction<string[]>) => {
+                    state.loading = false
                     state.images = action.payload
                 }
             )
             .addCase(getImages.rejected, (state, action) => {
+                state.loading = false
                 state.error = action.error?.message as string | null
             })
     },
@@ -37,6 +39,9 @@ const gallerySlice = createSlice({
 export const getImages = createAsyncThunk('gallery/getImages', async () => {
     try {
         const response = await fetch('http://localhost:8000/photos')
+        // test a pending request:
+        // await new Promise((resolve) => setTimeout(resolve, 2000))
+
         const data = await response.json()
         return data.photos
     } catch (error: unknown) {
