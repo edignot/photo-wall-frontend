@@ -1,46 +1,51 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface GalleryState {
-    value: number
+    images: string[]
+    loading: boolean
+    error: string | null
 }
 
 const initialState: GalleryState = {
-    value: 0,
+    images: [],
+    loading: false,
+    error: null,
 }
 
 const gallerySlice = createSlice({
     name: 'gallery',
     initialState,
-    reducers: {
-        increment: (state) => {
-            state.value += 1
-        },
-        incrementByAmount: (state, action) => {
-            state.value += action.payload
-        },
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(getImages.pending, () => {
-                console.log('getImagesAsync.pending')
+            .addCase(getImages.pending, (state) => {
+                state.loading = true
+                state.error = null
             })
             .addCase(
                 getImages.fulfilled,
-                (state, action: PayloadAction<number>) => {
-                    state.value += action.payload
+                (state, action: PayloadAction<string[]>) => {
+                    state.images = action.payload
                 }
             )
+            .addCase(getImages.rejected, (state, action) => {
+                state.error = action.error?.message as string | null
+            })
     },
 })
 
-export const getImages = createAsyncThunk(
-    'gallery/getImages',
-    async (amount: number) => {
-        await new Promise((resolve) => setTimeout(resolve, 1000))
-        return amount
+export const getImages = createAsyncThunk('gallery/getImages', async () => {
+    try {
+        const response = await fetch('http://localhost:8000/photos')
+        const data = await response.json()
+        return data.photos
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            return Promise.reject(error.message)
+        } else {
+            return Promise.reject('An unexpected error occurred.')
+        }
     }
-)
-
-export const { increment, incrementByAmount } = gallerySlice.actions
+})
 
 export default gallerySlice.reducer

@@ -1,21 +1,33 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from '../state/store'
-import {
-    increment,
-    incrementByAmount,
-    getImages,
-} from '../state/gallery/gallerySlice'
+import { getImages } from '../state/gallery/gallerySlice'
 
 const Gallery = () => {
-    const gallery = useSelector((state: RootState) => state.gallery.value)
     const dispatch = useDispatch<AppDispatch>()
+    const { images, error } = useSelector((state: RootState) => state.gallery)
+
+    const handleClick = async () => {
+        try {
+            const response = await dispatch(getImages())
+            console.log('Fetched Images:', response)
+        } catch (error) {
+            console.error('Error fetching images:', error)
+        }
+    }
 
     return (
         <div>
-            {gallery}
-            <button onClick={() => dispatch(increment())}>+</button>
-            <button onClick={() => dispatch(incrementByAmount(10))}>+10</button>
-            <button onClick={() => dispatch(getImages(10))}>+10async</button>
+            <button onClick={handleClick}>Get Images</button>
+            {error && <p>Error: {error}</p>}
+            {images.length > 0 && (
+                <ul>
+                    {images.map((image) => (
+                        <li key={image.id}>
+                            <p>Note: {image.note}</p>
+                        </li>
+                    ))}
+                </ul>
+            )}
         </div>
     )
 }
