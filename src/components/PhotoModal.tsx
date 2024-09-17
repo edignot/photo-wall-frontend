@@ -30,7 +30,7 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
             return
         }
 
-        uploadPhoto(photo)
+        await uploadPhoto(photo)
     }
 
     const handleCreatePhoto = async (
