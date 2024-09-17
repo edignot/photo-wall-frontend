@@ -24,7 +24,12 @@ const initialState: GalleryState = {
 const gallerySlice = createSlice({
     name: 'gallery',
     initialState,
-    reducers: {},
+    reducers: {
+        // select image
+        selectImage: (state, action: PayloadAction<string>) => {
+            state.selectedImage = action.payload
+        },
+    },
     extraReducers: (builder) => {
         // Get all images
         builder
@@ -44,7 +49,7 @@ const gallerySlice = createSlice({
                 state.error = action.error?.message as string | null
             })
 
-        // Get image by id
+        // Get image by id (for cases if initial state does not include all image details )
         builder
             .addCase(getImage.pending, (state) => {
                 state.loading = true
@@ -167,5 +172,7 @@ export const deleteImage = createAsyncThunk(
         return photoId
     }
 )
+
+export const { selectImage } = gallerySlice.actions
 
 export default gallerySlice.reducer
