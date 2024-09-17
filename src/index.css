@@ -2,11 +2,21 @@
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
-
-    color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
-
+    background-image: linear-gradient(
+        to bottom,
+        #111111,
+        #222222 10%,
+        #333333 20%,
+        #444444 30%,
+        #333333 40%,
+        #222222 50%,
+        #333333 60%,
+        #444444 70%,
+        #555555 80%,
+        #666666
+    );
+    background-size: 100% 100%;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -16,12 +26,31 @@
 #root {
     max-width: 1280px;
     margin: 0 auto;
-    padding: 2rem;
     text-align: center;
 }
 
 .gallery-container {
-    border: 2px solid white;
+    /* border: 2px solid white; */
+}
+
+.gallery-controls {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+.take-picture-button {
+    background-color: transparent;
+    border: none;
+    transition: transform 0.3s ease-in-out;
+}
+
+.take-picture-button:hover {
+    transform: scale(1.1) rotate(-7deg);
+}
+
+.take-picture-button img {
+    width: 100px;
 }
 
 .photo-grid {
@@ -39,6 +68,13 @@
     background-color: #f0f0f0;
     border: 1px solid #ccc;
     margin: 10px;
+    border-radius: 5px;
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.photo-grid-item:hover {
+    transform: rotate(1deg);
 }
 
 .photo-card {
@@ -46,7 +82,6 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #f0f0f0;
 }
 
 .photo-card img {

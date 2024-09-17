@@ -23,15 +23,29 @@ const Gallery = () => {
 
     return (
         <div className='gallery-container'>
+            <div className='gallery-controls'>
+                <button
+                    className='take-picture-button'
+                    onClick={() => alert('hi')}
+                >
+                    <img
+                        src='../../src/assets/camera-icon.png'
+                        alt='Take Picture'
+                    />
+                </button>
+                <button onClick={() => alert('delete')}>Delete Picture</button>
+            </div>
             {loading && <p>Loading photos...</p>}
             {error && <p>Error fetching photos!</p>}
             {photos.length > 0 && (
                 <ul className='photo-grid'>
-                    {photos.map((photo) => (
-                        <li key={photo._id} className='photo-grid-item'>
-                            <PhotoCard photo={photo} />
-                        </li>
-                    ))}
+                    {photos.map((photo) => {
+                        return (
+                            <li key={photo._id} className='photo-grid-item'>
+                                <PhotoCard photo={photo} />
+                            </li>
+                        )
+                    })}
                 </ul>
             )}
         </div>
