@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const BASE_URL = 'http://localhost:8000'
 
-export const getPhotos = async () => {
+export const getDbPhotos = async () => {
     try {
         const response = await axios.get(`${BASE_URL}/photos`)
 
@@ -13,7 +13,7 @@ export const getPhotos = async () => {
     }
 }
 
-export const getPhoto = async (photoId: string) => {
+export const getDbPhoto = async (photoId: string) => {
     try {
         const response = await axios.get(`${BASE_URL}/photos/${photoId}`)
 
@@ -24,7 +24,7 @@ export const getPhoto = async (photoId: string) => {
     }
 }
 
-export const createPhoto = async (photoData: {
+export const createDbPhoto = async (photoData: {
     photoUrl: string
     note?: string
 }) => {
@@ -38,7 +38,7 @@ export const createPhoto = async (photoData: {
     }
 }
 
-export const updatePhoto = async (photoData: {
+export const updateDbPhoto = async (photoData: {
     photoId: string
     note?: string
 }) => {
@@ -55,7 +55,7 @@ export const updatePhoto = async (photoData: {
     }
 }
 
-export const deletePhoto = async (photoId: string) => {
+export const deleteDbPhoto = async (photoId: string) => {
     try {
         const response = await axios.delete(`${BASE_URL}/photos/${photoId}`)
 

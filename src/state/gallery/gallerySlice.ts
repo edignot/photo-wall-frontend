@@ -1,22 +1,22 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import {
-    getPhotos,
-    getPhoto,
-    createPhoto,
-    updatePhoto,
-    deletePhoto,
+    getDbPhotos,
+    getDbPhoto,
+    createDbPhoto,
+    updateDbPhoto,
+    deleteDbPhoto,
 } from './api'
 
 interface GalleryState {
-    images: string[]
-    selectedImage: string | null
+    photos: string[]
+    selectedPhoto: string | null
     loading: boolean
     error: string | null
 }
 
 const initialState: GalleryState = {
-    images: [],
-    selectedImage: null,
+    photos: [],
+    selectedPhoto: null,
     loading: false,
     error: null,
 }
@@ -25,154 +25,154 @@ const gallerySlice = createSlice({
     name: 'gallery',
     initialState,
     reducers: {
-        // select image
-        selectImage: (state, action: PayloadAction<string>) => {
-            state.selectedImage = action.payload
+        // select photo
+        selectPhoto: (state, action: PayloadAction<string>) => {
+            state.selectedPhoto = action.payload
         },
     },
     extraReducers: (builder) => {
-        // Get all images
+        // Get all photos
         builder
-            .addCase(getImages.pending, (state) => {
+            .addCase(getPhotos.pending, (state) => {
                 state.loading = true
                 state.error = null
             })
             .addCase(
-                getImages.fulfilled,
+                getPhotos.fulfilled,
                 (state, action: PayloadAction<string[]>) => {
                     state.loading = false
-                    state.images = action.payload
+                    state.photos = action.payload
                 }
             )
-            .addCase(getImages.rejected, (state, action) => {
+            .addCase(getPhotos.rejected, (state, action) => {
                 state.loading = false
                 state.error = action.error?.message as string | null
             })
 
-        // Get image by id (for cases if initial state does not include all image details )
+        // Get photo by id (for cases if initial state does not include all photo details )
         builder
-            .addCase(getImage.pending, (state) => {
+            .addCase(getPhoto.pending, (state) => {
                 state.loading = true
                 state.error = null
             })
             .addCase(
-                getImage.fulfilled,
+                getPhoto.fulfilled,
                 (state, action: PayloadAction<string>) => {
                     state.loading = false
-                    state.selectedImage = action.payload
+                    state.selectedPhoto = action.payload
                 }
             )
-            .addCase(getImage.rejected, (state, action) => {
+            .addCase(getPhoto.rejected, (state, action) => {
                 state.loading = false
                 state.error = (action.error?.message as string) || null
             })
 
-        // create image
+        // create photo
         builder
-            .addCase(createImage.pending, (state) => {
+            .addCase(createPhoto.pending, (state) => {
                 state.loading = true
                 state.error = null
             })
             .addCase(
-                createImage.fulfilled,
+                createPhoto.fulfilled,
                 (state, action: PayloadAction<string>) => {
                     state.loading = false
-                    state.images.push(action.payload)
+                    state.photos.push(action.payload)
                 }
             )
-            .addCase(createImage.rejected, (state, action) => {
+            .addCase(createPhoto.rejected, (state, action) => {
                 state.loading = false
                 state.error = (action.error?.message as string) || null
             })
 
-        // update image
+        // update photo
         builder
-            .addCase(updateImage.pending, (state) => {
+            .addCase(updatePhoto.pending, (state) => {
                 state.loading = true
                 state.error = null
             })
             .addCase(
-                updateImage.fulfilled,
+                updatePhoto.fulfilled,
                 (state, action: PayloadAction<string>) => {
                     state.loading = false
-                    const index = state.images.findIndex(
+                    const index = state.photos.findIndex(
                         (id) => id === action.payload
                     )
                     if (index !== -1) {
-                        state.images[index] = action.payload // Update photo in images
+                        state.photos[index] = action.payload
                     }
                 }
             )
-            .addCase(updateImage.rejected, (state, action) => {
+            .addCase(updatePhoto.rejected, (state, action) => {
                 state.loading = false
                 state.error = (action.error?.message as string) || null
             })
 
         // Delete photo
         builder
-            .addCase(deleteImage.pending, (state) => {
+            .addCase(deletePhoto.pending, (state) => {
                 state.loading = true
                 state.error = null
             })
             .addCase(
-                deleteImage.fulfilled,
+                deletePhoto.fulfilled,
                 (state, action: PayloadAction<string>) => {
                     state.loading = false
-                    const index = state.images.findIndex(
+                    const index = state.photos.findIndex(
                         (id) => id === action.payload
                     )
                     if (index !== -1) {
-                        state.images.splice(index, 1)
-                        if (state.selectedImage === action.payload) {
-                            state.selectedImage = null
+                        state.photos.splice(index, 1)
+                        if (state.selectedPhoto === action.payload) {
+                            state.selectedPhoto = null
                         }
                     }
                 }
             )
-            .addCase(deleteImage.rejected, (state, action) => {
+            .addCase(deletePhoto.rejected, (state, action) => {
                 state.loading = false
                 state.error = (action.error?.message as string) || null
             })
     },
 })
 
-export const getImages = createAsyncThunk('gallery/getImages', async () => {
-    const photos = await getPhotos()
+export const getPhotos = createAsyncThunk('gallery/getPhotos', async () => {
+    const photos = await getDbPhotos()
     return photos
 })
 
-export const getImage = createAsyncThunk(
-    'gallery/getImage',
+export const getPhoto = createAsyncThunk(
+    'gallery/getPhoto',
     async (photoId: string) => {
-        const photo = await getPhoto(photoId)
+        const photo = await getDbPhoto(photoId)
         return photo
     }
 )
 
-export const createImage = createAsyncThunk(
+export const createPhoto = createAsyncThunk(
     'gallery/createPhoto',
     async (photoData: { photoUrl: string; note?: string }) => {
-        const photo = await createPhoto(photoData)
+        const photo = await createDbPhoto(photoData)
         return photo
     }
 )
 
-export const updateImage = createAsyncThunk(
+export const updatePhoto = createAsyncThunk(
     'gallery/updatePhoto',
     async (photoData: { photoId: string; note?: string }) => {
-        const photo = await updatePhoto(photoData)
+        const photo = await updateDbPhoto(photoData)
         return photo
     }
 )
 
-export const deleteImage = createAsyncThunk(
+export const deletePhoto = createAsyncThunk(
     'gallery/deletePhoto',
     async (photoId: string) => {
-        await deletePhoto(photoId)
+        await deleteDbPhoto(photoId)
         return photoId
     }
 )
 
-export const { selectImage } = gallerySlice.actions
+export const { selectPhoto } = gallerySlice.actions
 
 export default gallerySlice.reducer
