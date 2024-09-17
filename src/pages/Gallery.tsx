@@ -1,33 +1,98 @@
+// import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from '../state/store'
-import { getImages } from '../state/gallery/gallerySlice'
-import ImageCard from '../components/ImageCard'
+import {
+    getPhotos,
+    getPhoto,
+    selectPhoto,
+    createPhoto,
+    updatePhoto,
+    deletePhoto,
+} from '../state/gallery/gallerySlice'
+import PhotoCard from '../components/PhotoCard'
 
 const Gallery = () => {
     const dispatch = useDispatch<AppDispatch>()
-    const { images, loading, error } = useSelector(
+    const { photos, selectedPhoto, loading, error } = useSelector(
         (state: RootState) => state.gallery
     )
 
-    const handleClick = async () => {
+    const handleGetPhotos = async () => {
         try {
-            const response = await dispatch(getImages())
-            console.log('Fetched Images:', response)
+            const response = await dispatch(getPhotos())
+            console.log('Photos', response)
         } catch (error) {
-            console.error('Error fetching images:', error)
+            console.error('Error getting photos:', error)
+        }
+    }
+
+    const handleGetPhoto = async () => {
+        try {
+            const response = await dispatch(
+                getPhoto('66e996575a846bc4f3089bcf')
+            )
+            console.log('Photo', response)
+        } catch (error) {
+            console.error('Error getting photo:', error)
+        }
+    }
+
+    const handleCreatePhoto = async () => {
+        try {
+            const response = await dispatch(
+                createPhoto({ photoUrl: 'test', note: 'test' })
+            )
+            console.log('Created photo', response)
+        } catch (error) {
+            console.error('Error creating photo:', error)
+        }
+    }
+
+    const handleSelectPhoto = () => {
+        dispatch(selectPhoto('66e9a0b05a846bc4f3089c42'))
+    }
+
+    const handleUpdatePhoto = async () => {
+        try {
+            const response = await dispatch(
+                updatePhoto({
+                    photoId: '66e9a0b05a846bc4f3089c42',
+                    note: 'updating',
+                })
+            )
+            console.log('Updated photo', response)
+        } catch (error) {
+            console.error('Error updating photo:', error)
+        }
+    }
+
+    const handleDeletePhoto = async () => {
+        try {
+            const response = await dispatch(
+                deletePhoto('66e9a0b05a846bc4f3089c42')
+            )
+            console.log('Deleted photo', response)
+        } catch (error) {
+            console.error('Error deleting photo:', error)
         }
     }
 
     return (
         <div>
-            <button onClick={handleClick}>Get Images</button>
-            {loading && <p>Loading images...</p>}
-            {error && <p>Error fetching images!</p>}
-            {images.length > 0 && (
+            <button onClick={handleGetPhotos}>Get Photos</button>
+            <button onClick={handleGetPhoto}>Get Photo</button>
+            <button onClick={handleCreatePhoto}>Create Photo</button>
+            <button onClick={handleSelectPhoto}>Select Photo</button>
+            <button onClick={handleUpdatePhoto}>Update Photo</button>
+            <button onClick={handleDeletePhoto}>Delete Photo</button>
+            {loading && <p>Loading photos...</p>}
+            {error && <p>Error fetching photos!</p>}
+            {selectedPhoto && <h1>{selectedPhoto._id}</h1>}
+            {photos.length > 0 && (
                 <ul>
-                    {images.map((image) => (
-                        <li key={image.id}>
-                            <ImageCard image={image} />{' '}
+                    {photos.map((photo) => (
+                        <li key={photo.id}>
+                            <PhotoCard photo={photo} />{' '}
                         </li>
                     ))}
                 </ul>
