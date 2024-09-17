@@ -13,9 +13,20 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
 .photo-card img {
     width: 200px;
     height: 150px;
     object-fit: cover;
     border-radius: 5px;
+}
+
+.photo-grid {
+    border: 2px solid red;
 }
