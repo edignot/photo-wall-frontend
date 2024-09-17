@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../state/store'
 import { createPhoto } from '../state/gallery/gallerySlice'
+import axios from 'axios'
 
 interface PhotoModalProps {
     onClose: () => void
@@ -19,6 +20,37 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
 
     const handleUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUrl(event?.target.value)
+    }
+
+    const handlePhotoUpload = async (
+        event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        const photo = event.target.files[0]
+        if (!photo) {
+            return
+        }
+
+        const data = new FormData()
+        data.append('file', photo)
+        data.append('upload_preset', 'photo-wall')
+        data.append('cloud_name', 'ds6dxgvxo')
+
+        try {
+            const response = await axios.post(
+                'https://api.cloudinary.com/v1_1/ds6dxgvxooo/image/upload',
+                data,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                }
+            )
+
+            const uploadedImageUrl = response.data.url
+            console.log(uploadedImageUrl)
+        } catch (error) {
+            console.error('Error uploading photo:', error)
+        }
     }
 
     const handleCreatePhoto = async (
@@ -40,6 +72,7 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
     return (
         <div className='photo-modal'>
             <form onSubmit={handleCreatePhoto}>
+                <input type='file' onChange={handlePhotoUpload} />
                 <label htmlFor='photo-url'>Photo URL:</label>
                 <input
                     type='text'
