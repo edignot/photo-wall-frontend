@@ -39,17 +39,17 @@
     margin: 20px;
 }
 
-.take-picture-button {
+.take-photo-button {
     background-color: transparent;
     border: none;
     transition: transform 0.3s ease-in-out;
 }
 
-.take-picture-button:hover {
+.take-photo-button:hover {
     transform: scale(1.1) rotate(-7deg);
 }
 
-.take-picture-button img {
+.take-photo-button img {
     width: 100px;
 }
 
@@ -88,4 +88,18 @@
     flex: 1;
     object-fit: cover;
     margin: 20px 20px 0px 20px;
+}
+
+.photo-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    z-index: 9999;
+    /* display: none; Initially hidden */
 }

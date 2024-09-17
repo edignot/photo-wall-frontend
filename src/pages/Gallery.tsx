@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from '../state/store'
 import {
@@ -10,6 +10,7 @@ import {
     // deletePhoto,
 } from '../state/gallery/gallerySlice'
 import PhotoCard from '../components/PhotoCard'
+import PhotoModal from '../components/PhotoModal'
 
 const Gallery = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -21,12 +22,22 @@ const Gallery = () => {
         dispatch(getPhotos())
     }, [dispatch])
 
+    const [isPhotoModalOpen, setPhotoModalOpen] = useState(true)
+
+    const handleClosePhotoModal = () => {
+        setPhotoModalOpen(false)
+    }
+
+    const handleTakePhoto = () => {
+        setPhotoModalOpen(true)
+    }
+
     return (
         <div className='gallery-container'>
             <div className='gallery-controls'>
                 <button
-                    className='take-picture-button'
-                    onClick={() => alert('hi')}
+                    className='take-photo-button'
+                    onClick={() => handleTakePhoto()}
                 >
                     <img
                         src='../../src/assets/camera-icon.png'
@@ -48,6 +59,7 @@ const Gallery = () => {
                     })}
                 </ul>
             )}
+            {isPhotoModalOpen && <PhotoModal onClose={handleClosePhotoModal} />}
         </div>
     )
 }
