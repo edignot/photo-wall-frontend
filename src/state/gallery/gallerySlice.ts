@@ -8,10 +8,16 @@ import {
 } from './api'
 
 interface GalleryState {
-    photos: string[]
-    selectedPhoto: string | null
+    photos: Photo[]
+    selectedPhoto: Photo | null
     loading: boolean
     error: string | null
+}
+
+interface Photo {
+    _id: string
+    note: string
+    photoUrl: string
 }
 
 const initialState: GalleryState = {
@@ -25,90 +31,78 @@ const gallerySlice = createSlice({
     name: 'gallery',
     initialState,
     reducers: {
-        // select photo
         selectPhoto: (state, action: PayloadAction<string>) => {
-            state.selectedPhoto = action.payload
+            const photoId = action.payload
+
+            const foundPhoto = state.photos.find(
+                (photo: Photo) => photo._id === photoId
+            )
+
+            state.selectedPhoto = foundPhoto ? foundPhoto : null
         },
     },
     extraReducers: (builder) => {
-        // Get all photos
         builder
             .addCase(getPhotos.pending, (state) => {
                 state.loading = true
                 state.error = null
             })
-            .addCase(
-                getPhotos.fulfilled,
-                (state, action: PayloadAction<string[]>) => {
-                    state.loading = false
-                    state.photos = action.payload
-                }
-            )
+            .addCase(getPhotos.fulfilled, (state, action) => {
+                state.loading = false
+                state.photos = action.payload
+            })
             .addCase(getPhotos.rejected, (state, action) => {
                 state.loading = false
                 state.error = action.error?.message as string | null
             })
 
-        // Get photo by id (for cases if initial state does not include all photo details )
         builder
             .addCase(getPhoto.pending, (state) => {
                 state.loading = true
                 state.error = null
             })
-            .addCase(
-                getPhoto.fulfilled,
-                (state, action: PayloadAction<string>) => {
-                    state.loading = false
-                    state.selectedPhoto = action.payload
-                }
-            )
+            .addCase(getPhoto.fulfilled, (state, action) => {
+                state.loading = false
+                state.selectedPhoto = action.payload
+            })
             .addCase(getPhoto.rejected, (state, action) => {
                 state.loading = false
                 state.error = (action.error?.message as string) || null
             })
 
-        // create photo
         builder
             .addCase(createPhoto.pending, (state) => {
                 state.loading = true
                 state.error = null
             })
-            .addCase(
-                createPhoto.fulfilled,
-                (state, action: PayloadAction<string>) => {
-                    state.loading = false
-                    state.photos.push(action.payload)
-                }
-            )
+            .addCase(createPhoto.fulfilled, (state, action) => {
+                state.loading = false
+                state.photos.push(action.payload)
+            })
             .addCase(createPhoto.rejected, (state, action) => {
                 state.loading = false
                 state.error = (action.error?.message as string) || null
             })
 
-        // update photo
         builder
             .addCase(updatePhoto.pending, (state) => {
                 state.loading = true
                 state.error = null
             })
-            .addCase(
-                updatePhoto.fulfilled,
-                (state, action: PayloadAction<string>) => {
-                    state.loading = false
-                    const index = state.photos.findIndex(
-                        (id) => id === action.payload
-                    )
-                    if (index !== -1) {
-                        state.photos[index] = action.payload
-                    }
+            .addCase(updatePhoto.fulfilled, (state, action) => {
+                state.loading = false
+                const index = state.photos.findIndex(
+                    (photo) => photo._id === action.payload._id
+                )
+                if (index !== -1) {
+                    state.photos[index] = action.payload
                 }
-            )
+            })
             .addCase(updatePhoto.rejected, (state, action) => {
                 state.loading = false
                 state.error = (action.error?.message as string) || null
             })
 
-        // Delete photo
         builder
             .addCase(deletePhoto.pending, (state) => {
                 state.loading = true
@@ -118,12 +112,18 @@ const gallerySlice = createSlice({
                 deletePhoto.fulfilled,
                 (state, action: PayloadAction<string>) => {
                     state.loading = false
+
+                    console.log('deleted from db', action.payload)
                     const index = state.photos.findIndex(
-                        (id) => id === action.payload
+                        (photo) => photo._id === action.payload
                     )
+
                     if (index !== -1) {
                         state.photos.splice(index, 1)
-                        if (state.selectedPhoto === action.payload) {
+                        if (
+                            state.selectedPhoto &&
+                            state.selectedPhoto._id === action.payload
+                        ) {
                             state.selectedPhoto = null
                         }
                     }
