@@ -22,15 +22,14 @@ const Gallery = () => {
     }, [dispatch])
 
     return (
-        <div>
+        <div className='gallery-container'>
             {loading && <p>Loading photos...</p>}
-            {error && <p>Error loading photos...</p>}
-            {selectedPhoto && <h1>{selectedPhoto._id}</h1>}
+            {error && <p>Error fetching photos!</p>}
             {photos.length > 0 && (
                 <ul className='photo-grid'>
                     {photos.map((photo) => (
-                        <li key={photo._id}>
-                            <PhotoCard photo={photo} />{' '}
+                        <li key={photo._id} className='photo-grid-item'>
+                            <PhotoCard photo={photo} />
                         </li>
                     ))}
                 </ul>
