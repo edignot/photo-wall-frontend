@@ -69,7 +69,17 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
                 {photoUploading && (
                     <AiOutlineLoading className='upload-photo-loading' />
                 )}
-                {url && <img src={url} alt='uploaded photo' />}
+                {url && (
+                    <>
+                        <img src={url} alt='uploaded photo' />
+                        <button
+                            className='remove-photo-button'
+                            onClick={() => setUrl('')}
+                        >
+                            <IoMdClose />
+                        </button>
+                    </>
+                )}
             </div>
 
             <form onSubmit={handleCreatePhoto}>

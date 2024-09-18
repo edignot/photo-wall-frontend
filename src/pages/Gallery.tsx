@@ -24,6 +24,15 @@ const Gallery = () => {
 
     const [isPhotoModalOpen, setPhotoModalOpen] = useState<boolean>(false)
 
+    useEffect(() => {
+        const galleryContainer = document.querySelector('.gallery-container')
+        if (isPhotoModalOpen) {
+            galleryContainer?.classList.add('photo-modal-open')
+        } else {
+            galleryContainer?.classList.remove('photo-modal-open')
+        }
+    }, [isPhotoModalOpen])
+
     const handleClosePhotoModal = () => {
         setPhotoModalOpen(false)
     }
@@ -33,37 +42,44 @@ const Gallery = () => {
     }
 
     return (
-        <div className='gallery-container'>
-            <div className='gallery-controls'>
-                <button
-                    className='take-photo-button'
-                    onClick={() => handleTakePhoto()}
-                >
-                    <img
-                        src='../../src/assets/camera-icon.png'
-                        alt='take photo'
-                    />
-                </button>
-                <button onClick={() => alert('delete')}>Delete Picture</button>
+        <>
+            <div className='gallery-container'>
+                <div className='gallery-controls'>
+                    <button
+                        className='take-photo-button'
+                        onClick={() => handleTakePhoto()}
+                    >
+                        <img
+                            src='../../src/assets/camera-icon.png'
+                            alt='take photo'
+                        />
+                    </button>
+                    <button onClick={() => alert('delete')}>
+                        Delete Picture
+                    </button>
+                </div>
+                {loading && <p>Loading photos...</p>}
+                {error && <p>Error fetching photos!</p>}
+                {photos.length > 0 && (
+                    <ul className='photo-grid'>
+                        {photos
+                            .slice()
+                            .reverse()
+                            .map((photo) => {
+                                return (
+                                    <li
+                                        key={photo._id}
+                                        className='photo-grid-item'
+                                    >
+                                        <PhotoCard photo={photo} />
+                                    </li>
+                                )
+                            })}
+                    </ul>
+                )}
             </div>
-            {loading && <p>Loading photos...</p>}
-            {error && <p>Error fetching photos!</p>}
-            {photos.length > 0 && (
-                <ul className='photo-grid'>
-                    {photos
-                        .slice()
-                        .reverse()
-                        .map((photo) => {
-                            return (
-                                <li key={photo._id} className='photo-grid-item'>
-                                    <PhotoCard photo={photo} />
-                                </li>
-                            )
-                        })}
-                </ul>
-            )}
             {isPhotoModalOpen && <PhotoModal onClose={handleClosePhotoModal} />}
-        </div>
+        </>
     )
 }
 

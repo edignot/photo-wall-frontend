@@ -104,23 +104,64 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    position: relative;
+}
+
+.select-photo-button,
+.remove-photo-button,
+.cancel-photo-button,
+.upload-photo-button {
+    font-size: 50px;
+    background-color: transparent;
+    border: none;
+    transition: transform 0.3s ease-in-out;
+}
+
+.remove-photo-button {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    color: #dfdfdf;
 }
 
 .select-photo-button {
     width: 100px;
     height: 100px;
-    background-color: transparent;
-    border: none;
     background-image: url('../../src/assets/select-photo-icon.png');
     background-size: contain;
     background-repeat: no-repeat;
-    transition: transform 0.3s ease-in-out;
 }
 
 .select-photo-button:hover,
+.remove-photo-button:hover,
 .cancel-photo-button:hover,
 .upload-photo-button:hover {
     transform: scale(1.1);
+}
+
+.upload-photo-controls {
+    display: flex;
+    justify-content: space-around;
+}
+
+.cancel-photo-button {
+    color: #a60000;
+}
+
+.upload-photo-button {
+    color: #008874;
+}
+
+.upload-photo-button:disabled {
+    color: #dfdfdf;
+}
+
+#photo-note {
+    width: 85%;
+    padding: 5px;
+    font-size: 1.2rem;
+    text-align: center;
+    border: none;
 }
 
 .upload-photo-loading {
@@ -138,32 +179,8 @@
     }
 }
 
-#photo-note {
-    width: 85%;
-    padding: 5px;
-    font-size: 1.2rem;
-    text-align: center;
-    border: none;
-}
-
-.upload-photo-controls {
-    display: flex;
-    justify-content: space-around;
-}
-
-.cancel-photo-button,
-.upload-photo-button {
-    background-color: transparent;
-    border: none;
-    font-size: 50px;
-    color: #a60000;
-    transition: transform 0.3s ease-in-out;
-}
-
-.upload-photo-button {
-    color: #008874;
-}
-
-.upload-photo-button:disabled {
-    color: #dfdfdf;
+.photo-modal-open {
+    overflow: hidden;
+    opacity: 0.3;
+    pointer-events: none;
 }
