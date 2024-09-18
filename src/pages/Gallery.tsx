@@ -50,13 +50,16 @@ const Gallery = () => {
             {error && <p>Error fetching photos!</p>}
             {photos.length > 0 && (
                 <ul className='photo-grid'>
-                    {photos.map((photo) => {
-                        return (
-                            <li key={photo._id} className='photo-grid-item'>
-                                <PhotoCard photo={photo} />
-                            </li>
-                        )
-                    })}
+                    {photos
+                        .slice()
+                        .reverse()
+                        .map((photo) => {
+                            return (
+                                <li key={photo._id} className='photo-grid-item'>
+                                    <PhotoCard photo={photo} />
+                                </li>
+                            )
+                        })}
                 </ul>
             )}
             {isPhotoModalOpen && <PhotoModal onClose={handleClosePhotoModal} />}

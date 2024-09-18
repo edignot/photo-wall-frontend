@@ -2,19 +2,7 @@
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
-    background-image: linear-gradient(
-        to bottom,
-        #111111,
-        #222222 10%,
-        #333333 20%,
-        #444444 30%,
-        #333333 40%,
-        #222222 50%,
-        #333333 60%,
-        #444444 70%,
-        #555555 80%,
-        #666666
-    );
+    background-color: #202020;
     background-size: 100% 100%;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -26,10 +14,6 @@
     max-width: 1280px;
     margin: 0 auto;
     text-align: center;
-}
-
-.gallery-container {
-    /* border: 2px solid white; */
 }
 
 .gallery-controls {
@@ -65,7 +49,6 @@
     width: 300px;
     height: 400px;
     background-color: #f0f0f0;
-    border: 1px solid #ccc;
     margin: 10px;
     border-radius: 5px;
     transition: transform 0.3s ease-in-out;
@@ -108,7 +91,7 @@
 }
 
 .upload-photo-container {
-    background-color: rgb(239, 239, 239);
+    background-color: #dfdfdf;
     width: 300px;
     height: 320px;
     margin: 20px 20px 0px 20px;
@@ -123,7 +106,7 @@
     object-fit: cover;
 }
 
-.upload-photo-button {
+.select-photo-button {
     width: 100px;
     height: 100px;
     background-color: transparent;
@@ -134,9 +117,9 @@
     transition: transform 0.3s ease-in-out;
 }
 
-.upload-photo-button:hover,
+.select-photo-button:hover,
 .cancel-photo-button:hover,
-.submit-photo-button:hover {
+.upload-photo-button:hover {
     transform: scale(1.1);
 }
 
@@ -163,13 +146,13 @@
     border: none;
 }
 
-.submit-photo-controls {
+.upload-photo-controls {
     display: flex;
     justify-content: space-around;
 }
 
 .cancel-photo-button,
-.submit-photo-button {
+.upload-photo-button {
     background-color: transparent;
     border: none;
     font-size: 50px;
@@ -177,6 +160,10 @@
     transition: transform 0.3s ease-in-out;
 }
 
-.submit-photo-button {
+.upload-photo-button {
     color: #008874;
+}
+
+.upload-photo-button:disabled {
+    color: #dfdfdf;
 }

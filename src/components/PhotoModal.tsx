@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../state/store'
 import { createPhoto } from '../state/gallery/gallerySlice'
 import { uploadPhoto } from '../api/cloudinary'
-import { IoMdClose, IoMdCheckmark, IoMdAdd } from 'react-icons/io'
+import { IoMdClose, IoMdAdd } from 'react-icons/io'
 import { AiOutlineLoading } from 'react-icons/ai'
 
 interface PhotoModalProps {
@@ -42,10 +42,7 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
         event.preventDefault()
 
         try {
-            const response = await dispatch(
-                createPhoto({ photoUrl: url, note: note })
-            )
-            console.log('Created photo', response)
+            await dispatch(createPhoto({ photoUrl: url, note: note }))
         } catch (error) {
             console.error('Error creating photo:', error)
         }
@@ -58,8 +55,8 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
                 {!photoUploading && !url && (
                     <>
                         <button
-                            className='upload-photo-button'
-                            onClick={() => photoInputRef.current.click()}
+                            className='select-photo-button'
+                            onClick={() => photoInputRef.current?.click()}
                         />
                         <input
                             type='file'
@@ -85,11 +82,15 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
                     onChange={handleNoteChange}
                 />
 
-                <div className='submit-photo-controls'>
+                <div className='upload-photo-controls'>
                     <button className='cancel-photo-button' onClick={onClose}>
                         <IoMdClose />
                     </button>
-                    <button className='submit-photo-button' type='submit'>
+                    <button
+                        className='upload-photo-button'
+                        type='submit'
+                        disabled={!url}
+                    >
                         <IoMdAdd />
                     </button>
                 </div>
