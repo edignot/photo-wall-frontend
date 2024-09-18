@@ -134,7 +134,9 @@
     transition: transform 0.3s ease-in-out;
 }
 
-.upload-photo-button:hover {
+.upload-photo-button:hover,
+.cancel-photo-button:hover,
+.submit-photo-button:hover {
     transform: scale(1.1);
 }
 
@@ -151,4 +153,30 @@
     100% {
         transform: rotate(360deg);
     }
+}
+
+#photo-note {
+    width: 85%;
+    padding: 5px;
+    font-size: 1.2rem;
+    text-align: center;
+    border: none;
+}
+
+.submit-photo-controls {
+    display: flex;
+    justify-content: space-around;
+}
+
+.cancel-photo-button,
+.submit-photo-button {
+    background-color: transparent;
+    border: none;
+    font-size: 50px;
+    color: #a60000;
+    transition: transform 0.3s ease-in-out;
+}
+
+.submit-photo-button {
+    color: #008874;
 }

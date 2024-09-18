@@ -15,7 +15,7 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
 
     const [note, setNote] = useState<string>('')
     const [url, setUrl] = useState<string>('')
-    const [photoUploading, setPhotoUploading] = useState<boolean>(true)
+    const [photoUploading, setPhotoUploading] = useState<boolean>(false)
     const photoInputRef = useRef<HTMLInputElement>(null)
 
     const handleNoteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,9 +85,13 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
                     onChange={handleNoteChange}
                 />
 
-                <div>
-                    <button onClick={onClose}>Close</button>
-                    <button type='submit'>Create Photo</button>
+                <div className='submit-photo-controls'>
+                    <button className='cancel-photo-button' onClick={onClose}>
+                        <IoMdClose />
+                    </button>
+                    <button className='submit-photo-button' type='submit'>
+                        <IoMdAdd />
+                    </button>
                 </div>
             </form>
         </div>
