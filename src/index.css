@@ -95,11 +95,24 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
-    height: 400px;
+    width: 340px;
+    height: 450px;
+    border-radius: 5px;
     background-color: white;
-    border: 1px solid #ccc;
     padding: 20px;
     z-index: 9999;
-    /* display: none; Initially hidden */
+}
+
+.upload-photo-button {
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+    border: none;
+    background-image: url('../../src/assets/select-photo-icon.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.upload-photo-button img {
+    width: 100px;
 }

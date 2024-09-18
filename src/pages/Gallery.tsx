@@ -41,7 +41,7 @@ const Gallery = () => {
                 >
                     <img
                         src='../../src/assets/camera-icon.png'
-                        alt='Take Picture'
+                        alt='take photo'
                     />
                 </button>
                 <button onClick={() => alert('delete')}>Delete Picture</button>

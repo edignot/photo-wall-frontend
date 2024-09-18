@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../state/store'
 import { createPhoto } from '../state/gallery/gallerySlice'
@@ -13,24 +13,25 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
 
     const [note, setNote] = useState('')
     const [url, setUrl] = useState('')
+    const [photoUploading, setPhotoUploading] = useState(false)
+    const photoInputRef = useRef<HTMLInputElement>(null)
 
     const handleNoteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setNote(event?.target.value)
     }
 
-    const handleUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setUrl(event?.target.value)
-    }
-
     const handlePhotoUpload = async (
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
-        const photo = event.target.files[0]
+        const photo = event.target.files?.[0]
         if (!photo) {
             return
         }
 
-        await uploadPhoto(photo)
+        setPhotoUploading(true)
+        const photoUrl = await uploadPhoto(photo)
+        setUrl(photoUrl)
+        setPhotoUploading(false)
     }
 
     const handleCreatePhoto = async (
@@ -51,16 +52,18 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
 
     return (
         <div className='photo-modal'>
+            <button
+                className='upload-photo-button'
+                onClick={() => photoInputRef.current.click()}
+            />
+            <input
+                type='file'
+                ref={photoInputRef}
+                style={{ display: 'none' }}
+            />
+
             <form onSubmit={handleCreatePhoto}>
                 <input type='file' onChange={handlePhotoUpload} />
-                <label htmlFor='photo-url'>Photo URL:</label>
-                <input
-                    type='text'
-                    id='photo-url'
-                    value={url}
-                    onChange={handleUrlChange}
-                    required
-                />
 
                 <label htmlFor='photo-note'>Note:</label>
                 <input
