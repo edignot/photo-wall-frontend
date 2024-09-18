@@ -22,7 +22,7 @@ const Gallery = () => {
         dispatch(getPhotos())
     }, [dispatch])
 
-    const [isPhotoModalOpen, setPhotoModalOpen] = useState(false)
+    const [isPhotoModalOpen, setPhotoModalOpen] = useState<boolean>(false)
 
     const handleClosePhotoModal = () => {
         setPhotoModalOpen(false)

@@ -11,9 +11,9 @@ interface PhotoModalProps {
 const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
     const dispatch = useDispatch<AppDispatch>()
 
-    const [note, setNote] = useState('')
-    const [url, setUrl] = useState('')
-    const [photoUploading, setPhotoUploading] = useState(false)
+    const [note, setNote] = useState<string>('')
+    const [url, setUrl] = useState<string>('')
+    const [photoUploading, setPhotoUploading] = useState<boolean>(false)
     const photoInputRef = useRef<HTMLInputElement>(null)
 
     const handleNoteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,8 +73,8 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
                 />
 
                 <button type='submit'>Create Photo</button>
+                <button onClick={onClose}>Close</button>
             </form>
-            <button onClick={onClose}>Close</button>
         </div>
     )
 }
