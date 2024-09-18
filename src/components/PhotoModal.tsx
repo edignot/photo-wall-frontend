@@ -52,28 +52,38 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
 
     return (
         <div className='photo-modal'>
-            <button
-                className='upload-photo-button'
-                onClick={() => photoInputRef.current.click()}
-            />
-            <input
-                type='file'
-                ref={photoInputRef}
-                style={{ display: 'none' }}
-                onChange={handlePhotoUpload}
-            />
+            <div className='upload-photo-container'>
+                {!photoUploading && !url && (
+                    <>
+                        <button
+                            className='upload-photo-button'
+                            onClick={() => photoInputRef.current.click()}
+                        />
+                        <input
+                            type='file'
+                            ref={photoInputRef}
+                            style={{ display: 'none' }}
+                            onChange={handlePhotoUpload}
+                        />
+                    </>
+                )}
+                {url && <img src={url} alt='uploaded photo' />}
+            </div>
 
             <form onSubmit={handleCreatePhoto}>
-                <label htmlFor='photo-note'>Note:</label>
                 <input
                     type='text'
                     id='photo-note'
                     value={note}
+                    placeholder='add note'
+                    maxLength={40}
                     onChange={handleNoteChange}
                 />
 
-                <button type='submit'>Create Photo</button>
-                <button onClick={onClose}>Close</button>
+                <div>
+                    <button onClick={onClose}>Close</button>
+                    <button type='submit'>Create Photo</button>
+                </div>
             </form>
         </div>
     )
