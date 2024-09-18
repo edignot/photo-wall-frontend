@@ -60,11 +60,10 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
                 type='file'
                 ref={photoInputRef}
                 style={{ display: 'none' }}
+                onChange={handlePhotoUpload}
             />
 
             <form onSubmit={handleCreatePhoto}>
-                <input type='file' onChange={handlePhotoUpload} />
-
                 <label htmlFor='photo-note'>Note:</label>
                 <input
                     type='text'
