@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../state/store'
 import { createPhoto } from '../state/gallery/gallerySlice'
 import { uploadPhoto } from '../api/cloudinary'
+import { IoMdClose, IoMdCheckmark, IoMdAdd } from 'react-icons/io'
+import { AiOutlineLoading } from 'react-icons/ai'
 
 interface PhotoModalProps {
     onClose: () => void
@@ -13,7 +15,7 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
 
     const [note, setNote] = useState<string>('')
     const [url, setUrl] = useState<string>('')
-    const [photoUploading, setPhotoUploading] = useState<boolean>(false)
+    const [photoUploading, setPhotoUploading] = useState<boolean>(true)
     const photoInputRef = useRef<HTMLInputElement>(null)
 
     const handleNoteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,6 +68,9 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
                             onChange={handlePhotoUpload}
                         />
                     </>
+                )}
+                {photoUploading && (
+                    <AiOutlineLoading className='upload-photo-loading' />
                 )}
                 {url && <img src={url} alt='uploaded photo' />}
             </div>
