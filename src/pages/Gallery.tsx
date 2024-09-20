@@ -7,6 +7,7 @@ import PhotoModal from '../components/PhotoModal'
 
 const Gallery = () => {
     const dispatch = useDispatch<AppDispatch>()
+
     const { photos, loading, error } = useSelector(
         (state: RootState) => state.gallery
     )
@@ -27,12 +28,12 @@ const Gallery = () => {
         }
     }, [isPhotoModalOpen])
 
-    const handleClosePhotoModal = (): void => {
-        setPhotoModalOpen(false)
-    }
+    // const handleClosePhotoModal = (): void => {
+    //     setPhotoModalOpen(false)
+    // }
 
     const handleTakePhoto = (): void => {
-        setPhotoModalOpen(true)
+        setPhotoModalOpen((prevState) => !prevState)
     }
 
     return (
@@ -41,7 +42,7 @@ const Gallery = () => {
                 <div className='gallery-controls'>
                     <button
                         className='take-photo-btn'
-                        onClick={() => handleTakePhoto()}
+                        onClick={handleTakePhoto}
                     >
                         <img
                             src='../../src/assets/camera-icon.png'
@@ -69,7 +70,7 @@ const Gallery = () => {
                     </ul>
                 )}
             </div>
-            {isPhotoModalOpen && <PhotoModal onClose={handleClosePhotoModal} />}
+            {isPhotoModalOpen && <PhotoModal onClose={handleTakePhoto} />}
         </>
     )
 }
