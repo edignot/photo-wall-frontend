@@ -1,38 +1,20 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../state/store'
 import { createPhoto } from '../state/gallery/gallerySlice'
+import PhotoUpload from './PhotoUpload'
 import ActionButtons from './ActionButtons'
-import { uploadPhoto } from '../api/cloudinary'
-import { IoMdClose } from 'react-icons/io'
-import { AiOutlineLoading } from 'react-icons/ai'
 
 const PhotoModal = ({ onClose }: { onClose: () => void }) => {
     const dispatch = useDispatch<AppDispatch>()
 
     const [note, setNote] = useState<string>('')
     const [url, setUrl] = useState<string>('')
-    const [photoUploading, setPhotoUploading] = useState<boolean>(false)
-    const photoInputRef = useRef<HTMLInputElement>(null)
 
     const handleNoteChange = (
         event: React.ChangeEvent<HTMLInputElement>
     ): void => {
         setNote(event?.target.value)
-    }
-
-    const handlePhotoUpload = async (
-        event: React.ChangeEvent<HTMLInputElement>
-    ): Promise<void> => {
-        const photo = event.target.files?.[0]
-        if (!photo) {
-            return
-        }
-
-        setPhotoUploading(true)
-        const photoUrl = await uploadPhoto(photo)
-        setUrl(photoUrl)
-        setPhotoUploading(false)
     }
 
     const handleCreatePhoto = async (
@@ -50,36 +32,7 @@ const PhotoModal = ({ onClose }: { onClose: () => void }) => {
 
     return (
         <div className='photo-modal'>
-            <div className='upload-photo-container'>
-                {!photoUploading && !url && (
-                    <>
-                        <button
-                            className='select-photo-btn'
-                            onClick={() => photoInputRef.current?.click()}
-                        />
-                        <input
-                            type='file'
-                            ref={photoInputRef}
-                            style={{ display: 'none' }}
-                            onChange={handlePhotoUpload}
-                        />
-                    </>
-                )}
-                {photoUploading && (
-                    <AiOutlineLoading className='upload-photo-loading' />
-                )}
-                {url && (
-                    <>
-                        <img src={url} alt='uploaded photo' />
-                        <button
-                            className='remove-photo-btn'
-                            onClick={() => setUrl('')}
-                        >
-                            <IoMdClose />
-                        </button>
-                    </>
-                )}
-            </div>
+            <PhotoUpload setUrl={setUrl} url={url} />
 
             <form onSubmit={handleCreatePhoto}>
                 <input
