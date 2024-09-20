@@ -28,12 +28,8 @@ const Gallery = () => {
         }
     }, [isPhotoModalOpen])
 
-    // const handleClosePhotoModal = (): void => {
-    //     setPhotoModalOpen(false)
-    // }
-
     const handleTakePhoto = (): void => {
-        setPhotoModalOpen((prevState) => !prevState)
+        setPhotoModalOpen(!isPhotoModalOpen)
     }
 
     return (

@@ -18,7 +18,7 @@ const PhotoCard = ({ photo }: { photo: Photo }) => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
     const handleDeletePhoto = (): void => {
-        setIsModalOpen((prevState) => !prevState)
+        setIsModalOpen(!isModalOpen)
     }
 
     const handleConfirmDelete = async (): Promise<void> => {
