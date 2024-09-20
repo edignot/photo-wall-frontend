@@ -40,7 +40,7 @@ const EditableNote = ({
                     ref={inputRef}
                     value={editedNote}
                     placeholder={note}
-                    maxLength={50}
+                    maxLength={20}
                     onChange={handleChange}
                     onBlur={handleBlur}
                 />

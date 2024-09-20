@@ -85,7 +85,7 @@ const PhotoModal = ({ onClose }: { onClose: () => void }) => {
                     className='photo-note'
                     value={note}
                     placeholder='add note'
-                    maxLength={50}
+                    maxLength={20}
                     onChange={handleNoteChange}
                 />
 
