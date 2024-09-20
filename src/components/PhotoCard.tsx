@@ -4,6 +4,7 @@ import { RootState, AppDispatch } from '../state/store'
 import { deletePhoto, updatePhoto } from '../state/gallery/gallerySlice'
 import { IoMdClose } from 'react-icons/io'
 import ActionButtons from './ActionButtons'
+import EditableNote from './EditableNote'
 
 interface Photo {
     photoUrl: string
@@ -31,6 +32,22 @@ const PhotoCard = ({ photo }: { photo: Photo }) => {
         setIsModalOpen(false)
     }
 
+    const handleUpdatePhoto = async (
+        editedNote: string | undefined
+    ): Promise<void> => {
+        try {
+            const response = await dispatch(
+                updatePhoto({
+                    photoId: photo._id,
+                    note: editedNote,
+                })
+            )
+            console.log('Updated photo', response)
+        } catch (error) {
+            console.error('Error updating photo:', error)
+        }
+    }
+
     return (
         <>
             {!isModalOpen ? (
@@ -44,9 +61,11 @@ const PhotoCard = ({ photo }: { photo: Photo }) => {
                         </button>
                         <img src={photo.photoUrl} alt='gallery photo' />
                     </div>
-                    {photo.note && (
-                        <p className='photo-card-note'>{photo.note}</p>
-                    )}
+
+                    <EditableNote
+                        note={photo.note}
+                        editNote={handleUpdatePhoto}
+                    />
                 </>
             ) : (
                 <ActionButtons

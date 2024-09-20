@@ -15,16 +15,14 @@ const PhotoModal = ({ onClose }: { onClose: () => void }) => {
     const [photoUploading, setPhotoUploading] = useState<boolean>(false)
     const photoInputRef = useRef<HTMLInputElement>(null)
 
-    const handleNoteChange = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ): void => {
-        setNote(event?.target.value)
+    const handleNoteChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        setNote(e?.target.value)
     }
 
     const handlePhotoUpload = async (
-        event: React.ChangeEvent<HTMLInputElement>
+        e: React.ChangeEvent<HTMLInputElement>
     ): Promise<void> => {
-        const photo = event.target.files?.[0]
+        const photo = e.target.files?.[0]
         if (!photo) {
             return
         }
@@ -36,9 +34,9 @@ const PhotoModal = ({ onClose }: { onClose: () => void }) => {
     }
 
     const handleCreatePhoto = async (
-        event: React.FormEvent<HTMLFormElement>
+        e: React.FormEvent<HTMLFormElement>
     ): Promise<void> => {
-        event.preventDefault()
+        e.preventDefault()
 
         try {
             await dispatch(createPhoto({ photoUrl: url, note: note }))
@@ -84,10 +82,10 @@ const PhotoModal = ({ onClose }: { onClose: () => void }) => {
             <form onSubmit={handleCreatePhoto}>
                 <input
                     type='text'
-                    id='photo-note'
+                    className='photo-note'
                     value={note}
                     placeholder='add note'
-                    maxLength={20}
+                    maxLength={50}
                     onChange={handleNoteChange}
                 />
 

@@ -74,12 +74,6 @@
     margin: 20px 20px 0px 20px;
 }
 
-.photo-card-note,
-.confirm-modal-note {
-    font-size: 1.2rem;
-    color: #333333;
-}
-
 .photo-modal {
     position: fixed;
     top: 50%;
@@ -173,12 +167,16 @@
     color: #dfdfdf;
 }
 
-#photo-note {
-    width: 85%;
+.photo-note,
+.confirm-modal-note {
     padding: 5px;
     font-size: 1.2rem;
     text-align: center;
     border: none;
+    text-wrap: wrap;
+    word-break: break-all;
+    color: #333333;
+    margin: 0;
 }
 
 .upload-photo-loading {
