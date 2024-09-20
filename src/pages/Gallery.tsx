@@ -20,7 +20,8 @@ const Gallery = () => {
     const [isPhotoModalOpen, setPhotoModalOpen] = useState<boolean>(false)
 
     useEffect(() => {
-        const galleryContainer = document.querySelector<Element>('.gallery')
+        const galleryContainer =
+            document.querySelector<Element>('.gallery-container')
         if (isPhotoModalOpen) {
             galleryContainer?.classList.add('photo-modal-open')
         } else {
