@@ -45,7 +45,7 @@
     margin: 0;
 }
 
-.photo-grid-item {
+.photo-card {
     width: 300px;
     height: 400px;
     background-color: #f0f0f0;
@@ -57,7 +57,7 @@
     flex-direction: column;
 }
 
-.photo-grid-item:hover {
+.photo-card:hover {
     transform: rotate(1deg);
 }
 
@@ -150,7 +150,7 @@
     transform: scale(1.1);
 }
 
-.action-btns {
+.action-btn-container {
     display: flex;
     justify-content: space-around;
 }

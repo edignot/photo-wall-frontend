@@ -20,8 +20,7 @@ const Gallery = () => {
     const [isPhotoModalOpen, setPhotoModalOpen] = useState<boolean>(false)
 
     useEffect(() => {
-        const galleryContainer =
-            document.querySelector<Element>('.gallery-container')
+        const galleryContainer = document.querySelector<Element>('.gallery')
         if (isPhotoModalOpen) {
             galleryContainer?.classList.add('photo-modal-open')
         } else {
@@ -48,10 +47,7 @@ const Gallery = () => {
                             .reverse()
                             .map((photo) => {
                                 return (
-                                    <li
-                                        key={photo._id}
-                                        className='photo-grid-item'
-                                    >
+                                    <li key={photo._id} className='photo-card'>
                                         <PhotoCard photo={photo} />
                                     </li>
                                 )

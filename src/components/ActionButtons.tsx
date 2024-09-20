@@ -16,7 +16,7 @@ const ActionButtons = ({
     return (
         <div>
             <p>{note}</p>
-            <div className='action-btns'>
+            <div className='action-btn-container'>
                 <button className='cancel-btn' onClick={onCancel}>
                     <IoMdClose />
                 </button>

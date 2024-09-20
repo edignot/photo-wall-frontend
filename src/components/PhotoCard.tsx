@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { RootState, AppDispatch } from '../state/store'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../state/store'
 import { deletePhoto, updatePhoto } from '../state/gallery/gallerySlice'
 import { IoMdClose } from 'react-icons/io'
 import ActionButtons from './ActionButtons'
@@ -15,10 +15,10 @@ interface Photo {
 const PhotoCard = ({ photo }: { photo: Photo }) => {
     const dispatch = useDispatch<AppDispatch>()
 
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+    const [isDeleteMode, setDeleteMode] = useState<boolean>(false)
 
     const handleDeletePhoto = (): void => {
-        setIsModalOpen(!isModalOpen)
+        setDeleteMode(!isDeleteMode)
     }
 
     const handleConfirmDelete = async (): Promise<void> => {
@@ -29,10 +29,10 @@ const PhotoCard = ({ photo }: { photo: Photo }) => {
             console.error('Error deleting photo:', error)
         }
 
-        setIsModalOpen(false)
+        setDeleteMode(false)
     }
 
-    const handleUpdatePhoto = async (
+    const handleUpdateNote = async (
         editedNote: string | undefined
     ): Promise<void> => {
         try {
@@ -50,7 +50,7 @@ const PhotoCard = ({ photo }: { photo: Photo }) => {
 
     return (
         <>
-            {!isModalOpen ? (
+            {!isDeleteMode ? (
                 <>
                     <div className='photo-container'>
                         <button
@@ -59,12 +59,12 @@ const PhotoCard = ({ photo }: { photo: Photo }) => {
                         >
                             <IoMdClose />
                         </button>
-                        <img src={photo.photoUrl} alt='gallery photo' />
+                        <img src={photo.photoUrl} alt='photo card image' />
                     </div>
 
                     <EditableNote
                         note={photo.note}
-                        editNote={handleUpdatePhoto}
+                        editNote={handleUpdateNote}
                     />
                 </>
             ) : (
