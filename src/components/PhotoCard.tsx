@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { IoMdClose } from 'react-icons/io'
-import PhotoConfirmationModal from './PhotoConfirmationModal'
+import ActionButtons from './ActionButtons'
 
 interface Photo {
     photoUrl: string
@@ -43,9 +43,10 @@ const PhotoCard = ({ photo, onDeletePhoto }: PhotoCardProps) => {
                     )}
                 </>
             ) : (
-                <PhotoConfirmationModal
-                    onClose={handleDeletePhoto}
+                <ActionButtons
+                    onCancel={handleDeletePhoto}
                     onConfirm={handleConfirmDelete}
+                    note='Delete photo?'
                 />
             )}
         </>

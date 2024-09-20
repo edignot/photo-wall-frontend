@@ -1,19 +1,17 @@
 import { IoMdClose, IoMdCheckmark } from 'react-icons/io'
 
-interface PhotoConfirmationModalProps {
-    onClose: () => void
+interface ActionButtonsProps {
+    onCancel: () => void
     onConfirm: () => void
+    note?: string
 }
 
-const PhotoConfirmationModal = ({
-    onClose,
-    onConfirm,
-}: PhotoConfirmationModalProps) => {
+const ActionButtons = ({ onCancel, onConfirm, note }: ActionButtonsProps) => {
     return (
         <div className='photo-confirmation-modal'>
-            <p className='confirm-modal-note'>Delete photo?</p>
+            <p className='confirm-modal-note'>{note}</p>
             <div className=''>
-                <button className='cancel-btn' onClick={onClose}>
+                <button className='cancel-btn' onClick={onCancel}>
                     <IoMdClose />
                 </button>
                 <button className='confirm-btn' onClick={onConfirm}>
@@ -24,4 +22,4 @@ const PhotoConfirmationModal = ({
     )
 }
 
-export default PhotoConfirmationModal
+export default ActionButtons
