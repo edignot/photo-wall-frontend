@@ -7,11 +7,7 @@ import { uploadPhoto } from '../api/cloudinary'
 import { IoMdClose } from 'react-icons/io'
 import { AiOutlineLoading } from 'react-icons/ai'
 
-interface PhotoModalProps {
-    onClose: () => void
-}
-
-const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
+const PhotoModal = ({ onClose }: { onClose: () => void }) => {
     const dispatch = useDispatch<AppDispatch>()
 
     const [note, setNote] = useState<string>('')
