@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../state/store'
 import { createPhoto } from '../state/gallery/gallerySlice'
+import ActionButtons from './ActionButtons'
 import { uploadPhoto } from '../api/cloudinary'
 import { IoMdClose, IoMdAdd } from 'react-icons/io'
 import { AiOutlineLoading } from 'react-icons/ai'
@@ -92,18 +93,11 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
                     onChange={handleNoteChange}
                 />
 
-                <div className='upload-photo-controls'>
-                    <button className='cancel-photo-btn' onClick={onClose}>
-                        <IoMdClose />
-                    </button>
-                    <button
-                        className='upload-photo-btn'
-                        type='submit'
-                        disabled={!url}
-                    >
-                        <IoMdAdd />
-                    </button>
-                </div>
+                <ActionButtons
+                    onCancel={onClose}
+                    onConfirm={handleCreatePhoto}
+                    disabled={!url}
+                />
             </form>
         </div>
     )

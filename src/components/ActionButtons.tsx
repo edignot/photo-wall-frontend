@@ -4,17 +4,27 @@ interface ActionButtonsProps {
     onCancel: () => void
     onConfirm: () => void
     note?: string
+    disabled?: boolean
 }
 
-const ActionButtons = ({ onCancel, onConfirm, note }: ActionButtonsProps) => {
+const ActionButtons = ({
+    onCancel,
+    onConfirm,
+    note,
+    disabled,
+}: ActionButtonsProps) => {
     return (
-        <div className='photo-confirmation-modal'>
-            <p className='confirm-modal-note'>{note}</p>
-            <div className=''>
+        <div>
+            <p>{note}</p>
+            <div className='action-btns'>
                 <button className='cancel-btn' onClick={onCancel}>
                     <IoMdClose />
                 </button>
-                <button className='confirm-btn' onClick={onConfirm}>
+                <button
+                    className='confirm-btn'
+                    onClick={onConfirm}
+                    disabled={disabled}
+                >
                     <IoMdCheckmark />
                 </button>
             </div>

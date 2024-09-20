@@ -112,8 +112,6 @@
 
 .select-photo-btn,
 .remove-photo-btn,
-.cancel-photo-btn,
-.upload-photo-btn,
 .delete-photo-btn,
 .cancel-btn,
 .confirm-btn {
@@ -151,30 +149,27 @@
 
 .select-photo-btn:hover,
 .remove-photo-btn:hover,
-.cancel-photo-btn:hover,
-.upload-photo-btn:hover,
+.confirm-btn:hover,
 .delete-photo-btn:hover,
-.cancel-btn:hover,
-.confirm-btn:hover {
+.confirm-btn:hover,
+.cancel-btn:hover {
     transform: scale(1.1);
 }
 
-.upload-photo-controls {
+.action-btns {
     display: flex;
     justify-content: space-around;
 }
 
-.cancel-photo-btn,
 .cancel-btn {
     color: #a60000;
 }
 
-.upload-photo-btn,
 .confirm-btn {
     color: #008874;
 }
 
-.upload-photo-btn:disabled {
+.confirm-btn:disabled {
     color: #dfdfdf;
 }
 
