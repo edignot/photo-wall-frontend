@@ -44,7 +44,7 @@ const Note = ({ note, editNote }: NoteProps) => {
     }
 
     return (
-        <div>
+        <>
             {isEditMode ? (
                 <input
                     type='text'
@@ -66,7 +66,7 @@ const Note = ({ note, editNote }: NoteProps) => {
                     Add note
                 </p>
             )}
-        </div>
+        </>
     )
 }
 

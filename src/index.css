@@ -85,7 +85,6 @@
     background-color: white;
     padding: 20px;
     z-index: 9999;
-    border: 2px solid red;
 }
 
 .upload-photo-container {
@@ -170,14 +169,14 @@
 
 .note,
 .note-empty {
-    padding: 5px;
+    margin: 0;
+    padding: 5px 0;
     font-size: 1.2rem;
     text-align: center;
     border: none;
     text-wrap: wrap;
     word-break: break-all;
     color: #333333;
-    margin: 0;
 }
 
 .note-empty {

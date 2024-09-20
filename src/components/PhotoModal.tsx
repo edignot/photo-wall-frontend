@@ -37,7 +37,7 @@ const PhotoModal = ({ onClose }: { onClose: () => void }) => {
             <form onSubmit={handleCreatePhoto}>
                 <input
                     type='text'
-                    className='photo-note'
+                    className='note'
                     value={note}
                     placeholder='add note'
                     maxLength={20}
