@@ -2,15 +2,12 @@ import React, { useState, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../state/store'
 import { createPhoto } from '../state/gallery/gallerySlice'
+import ActionButtons from './ActionButtons'
 import { uploadPhoto } from '../api/cloudinary'
-import { IoMdClose, IoMdAdd } from 'react-icons/io'
+import { IoMdClose } from 'react-icons/io'
 import { AiOutlineLoading } from 'react-icons/ai'
 
-interface PhotoModalProps {
-    onClose: () => void
-}
-
-const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
+const PhotoModal = ({ onClose }: { onClose: () => void }) => {
     const dispatch = useDispatch<AppDispatch>()
 
     const [note, setNote] = useState<string>('')
@@ -18,14 +15,14 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
     const [photoUploading, setPhotoUploading] = useState<boolean>(false)
     const photoInputRef = useRef<HTMLInputElement>(null)
 
-    const handleNoteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setNote(event?.target.value)
+    const handleNoteChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        setNote(e?.target.value)
     }
 
     const handlePhotoUpload = async (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        const photo = event.target.files?.[0]
+        e: React.ChangeEvent<HTMLInputElement>
+    ): Promise<void> => {
+        const photo = e.target.files?.[0]
         if (!photo) {
             return
         }
@@ -37,9 +34,9 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
     }
 
     const handleCreatePhoto = async (
-        event: React.FormEvent<HTMLFormElement>
-    ) => {
-        event.preventDefault()
+        e: React.FormEvent<HTMLFormElement>
+    ): Promise<void> => {
+        e.preventDefault()
 
         try {
             await dispatch(createPhoto({ photoUrl: url, note: note }))
@@ -55,7 +52,7 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
                 {!photoUploading && !url && (
                     <>
                         <button
-                            className='select-photo-button'
+                            className='select-photo-btn'
                             onClick={() => photoInputRef.current?.click()}
                         />
                         <input
@@ -73,7 +70,7 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
                     <>
                         <img src={url} alt='uploaded photo' />
                         <button
-                            className='remove-photo-button'
+                            className='remove-photo-btn'
                             onClick={() => setUrl('')}
                         >
                             <IoMdClose />
@@ -85,25 +82,18 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
             <form onSubmit={handleCreatePhoto}>
                 <input
                     type='text'
-                    id='photo-note'
+                    className='photo-note'
                     value={note}
                     placeholder='add note'
-                    maxLength={40}
+                    maxLength={20}
                     onChange={handleNoteChange}
                 />
 
-                <div className='upload-photo-controls'>
-                    <button className='cancel-photo-button' onClick={onClose}>
-                        <IoMdClose />
-                    </button>
-                    <button
-                        className='upload-photo-button'
-                        type='submit'
-                        disabled={!url}
-                    >
-                        <IoMdAdd />
-                    </button>
-                </div>
+                <ActionButtons
+                    onCancel={onClose}
+                    onConfirm={handleCreatePhoto}
+                    disabled={!url}
+                />
             </form>
         </div>
     )
