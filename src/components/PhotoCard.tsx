@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState, AppDispatch } from '../state/store'
+import { deletePhoto } from '../state/gallery/gallerySlice'
 import { IoMdClose } from 'react-icons/io'
 import ActionButtons from './ActionButtons'
 
@@ -8,20 +11,23 @@ interface Photo {
     _id: string
 }
 
-interface PhotoCardProps {
-    photo: Photo
-    onDeletePhoto: (photoId: string) => void
-}
+const PhotoCard = ({ photo }: { photo: Photo }) => {
+    const dispatch = useDispatch<AppDispatch>()
 
-const PhotoCard = ({ photo, onDeletePhoto }: PhotoCardProps) => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
     const handleDeletePhoto = (): void => {
         setIsModalOpen((prevState) => !prevState)
     }
 
-    const handleConfirmDelete = (): void => {
-        onDeletePhoto(photo._id)
+    const handleConfirmDelete = async (): Promise<void> => {
+        try {
+            const response = await dispatch(deletePhoto(photo._id))
+            console.log('Deleted photo', response)
+        } catch (error) {
+            console.error('Error deleting photo:', error)
+        }
+
         setIsModalOpen(false)
     }
 

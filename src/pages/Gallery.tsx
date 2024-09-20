@@ -1,20 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from '../state/store'
-import {
-    getPhotos,
-    // getPhoto,
-    // selectPhoto,
-    // createPhoto,
-    // updatePhoto,
-    deletePhoto,
-} from '../state/gallery/gallerySlice'
+import { getPhotos } from '../state/gallery/gallerySlice'
 import PhotoCard from '../components/PhotoCard'
 import PhotoModal from '../components/PhotoModal'
 
 const Gallery = () => {
     const dispatch = useDispatch<AppDispatch>()
-    const { photos, selectedPhoto, loading, error } = useSelector(
+    const { photos, loading, error } = useSelector(
         (state: RootState) => state.gallery
     )
 
@@ -39,15 +32,6 @@ const Gallery = () => {
 
     const handleTakePhoto = () => {
         setPhotoModalOpen(true)
-    }
-
-    const handleDeletePhoto = async (id) => {
-        try {
-            const response = await dispatch(deletePhoto(id))
-            console.log('Deleted photo', response)
-        } catch (error) {
-            console.error('Error deleting photo:', error)
-        }
     }
 
     return (
@@ -77,10 +61,7 @@ const Gallery = () => {
                                         key={photo._id}
                                         className='photo-grid-item'
                                     >
-                                        <PhotoCard
-                                            photo={photo}
-                                            onDeletePhoto={handleDeletePhoto}
-                                        />
+                                        <PhotoCard photo={photo} />
                                     </li>
                                 )
                             })}

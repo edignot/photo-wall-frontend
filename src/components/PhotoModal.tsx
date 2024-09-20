@@ -4,7 +4,7 @@ import { AppDispatch } from '../state/store'
 import { createPhoto } from '../state/gallery/gallerySlice'
 import ActionButtons from './ActionButtons'
 import { uploadPhoto } from '../api/cloudinary'
-import { IoMdClose, IoMdAdd } from 'react-icons/io'
+import { IoMdClose } from 'react-icons/io'
 import { AiOutlineLoading } from 'react-icons/ai'
 
 interface PhotoModalProps {
