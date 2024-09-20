@@ -2,7 +2,7 @@ import { IoMdClose, IoMdCheckmark } from 'react-icons/io'
 
 interface ActionButtonsProps {
     onCancel: () => void
-    onConfirm: () => void
+    onConfirm: (event: React.SyntheticEvent<HTMLButtonElement>) => void
     note?: string
     disabled?: boolean
 }
@@ -22,7 +22,7 @@ const ActionButtons = ({
                 </button>
                 <button
                     className='confirm-btn'
-                    onClick={onConfirm}
+                    onClick={(event) => onConfirm(event)}
                     disabled={disabled}
                 >
                     <IoMdCheckmark />

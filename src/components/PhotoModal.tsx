@@ -18,7 +18,7 @@ const PhotoModal = ({ onClose }: { onClose: () => void }) => {
     }
 
     const handleCreatePhoto = async (
-        event: React.FormEvent<HTMLFormElement>
+        event: React.SyntheticEvent<HTMLButtonElement>
     ): Promise<void> => {
         event.preventDefault()
 
