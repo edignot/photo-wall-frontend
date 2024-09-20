@@ -3,15 +3,21 @@ import { IoMdClose } from 'react-icons/io'
 interface Photo {
     photoUrl: string
     note?: string
+    _id: string
 }
 
-const PhotoCard = ({ photo }: { photo: Photo }) => {
+interface PhotoCardProps {
+    photo: Photo
+    onDeletePhoto: (photoId: string) => void
+}
+
+const PhotoCard = ({ photo, onDeletePhoto }: PhotoCardProps) => {
     return (
         <>
             <div className='photo-container'>
                 <button
                     className='delete-photo-button'
-                    onClick={() => alert('hi')}
+                    onClick={() => onDeletePhoto(photo._id)}
                 >
                     <IoMdClose />
                 </button>

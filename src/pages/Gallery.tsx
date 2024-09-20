@@ -7,7 +7,7 @@ import {
     // selectPhoto,
     // createPhoto,
     // updatePhoto,
-    // deletePhoto,
+    deletePhoto,
 } from '../state/gallery/gallerySlice'
 import PhotoCard from '../components/PhotoCard'
 import PhotoModal from '../components/PhotoModal'
@@ -41,6 +41,15 @@ const Gallery = () => {
         setPhotoModalOpen(true)
     }
 
+    const handleDeletePhoto = async (id) => {
+        try {
+            const response = await dispatch(deletePhoto(id))
+            console.log('Deleted photo', response)
+        } catch (error) {
+            console.error('Error deleting photo:', error)
+        }
+    }
+
     return (
         <>
             <div className='gallery-container'>
@@ -68,7 +77,10 @@ const Gallery = () => {
                                         key={photo._id}
                                         className='photo-grid-item'
                                     >
-                                        <PhotoCard photo={photo} />
+                                        <PhotoCard
+                                            photo={photo}
+                                            onDeletePhoto={handleDeletePhoto}
+                                        />
                                     </li>
                                 )
                             })}
@@ -124,16 +136,5 @@ export default Gallery
 //         console.log('Updated photo', response)
 //     } catch (error) {
 //         console.error('Error updating photo:', error)
-//     }
-// }
-
-// const handleDeletePhoto = async () => {
-//     try {
-//         const response = await dispatch(
-//             deletePhoto('66e9a0b05a846bc4f3089c42')
-//         )
-//         console.log('Deleted photo', response)
-//     } catch (error) {
-//         console.error('Error deleting photo:', error)
 //     }
 // }
