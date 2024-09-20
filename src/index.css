@@ -16,7 +16,7 @@
     text-align: center;
 }
 
-.gallery-controls {
+.gallery-actions {
     display: flex;
     justify-content: space-between;
     margin: 20px;

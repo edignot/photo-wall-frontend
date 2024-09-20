@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from '../state/store'
 import { getPhotos } from '../state/gallery/gallerySlice'
+import GalleryActions from '../components/GalleryActions'
 import PhotoCard from '../components/PhotoCard'
 import PhotoModal from '../components/PhotoModal'
 
@@ -35,7 +36,8 @@ const Gallery = () => {
     return (
         <>
             <div className='gallery-container'>
-                <div className='gallery-controls'>
+                <GalleryActions />
+                {/* <div className='gallery-actions'>
                     <button
                         className='take-photo-btn'
                         onClick={handleTakePhoto}
@@ -45,7 +47,7 @@ const Gallery = () => {
                             alt='take photo'
                         />
                     </button>
-                </div>
+                </div> */}
                 {loading && <p>Loading photos...</p>}
                 {error && <p>Error fetching photos!</p>}
                 {photos.length > 0 && (
