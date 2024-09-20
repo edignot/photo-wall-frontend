@@ -30,7 +30,10 @@ const Note = ({ note, editNote }: NoteProps) => {
             | React.KeyboardEvent<HTMLInputElement>
             | React.ChangeEvent<HTMLInputElement>
     ): void => {
-        if (event.key === 'Enter' || event.type === 'blur') {
+        if (
+            ('key' in event && event.key === 'Enter') ||
+            event.type === 'blur'
+        ) {
             setEditMode(false)
             editNote(editedNote)
         }
