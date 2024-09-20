@@ -19,13 +19,15 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
     const [photoUploading, setPhotoUploading] = useState<boolean>(false)
     const photoInputRef = useRef<HTMLInputElement>(null)
 
-    const handleNoteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleNoteChange = (
+        event: React.ChangeEvent<HTMLInputElement>
+    ): void => {
         setNote(event?.target.value)
     }
 
     const handlePhotoUpload = async (
         event: React.ChangeEvent<HTMLInputElement>
-    ) => {
+    ): Promise<void> => {
         const photo = event.target.files?.[0]
         if (!photo) {
             return
@@ -39,7 +41,7 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
 
     const handleCreatePhoto = async (
         event: React.FormEvent<HTMLFormElement>
-    ) => {
+    ): Promise<void> => {
         event.preventDefault()
 
         try {

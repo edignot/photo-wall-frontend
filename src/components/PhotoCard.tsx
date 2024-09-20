@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from '../state/store'
-import { deletePhoto } from '../state/gallery/gallerySlice'
+import { deletePhoto, updatePhoto } from '../state/gallery/gallerySlice'
 import { IoMdClose } from 'react-icons/io'
 import ActionButtons from './ActionButtons'
 

@@ -18,7 +18,8 @@ const Gallery = () => {
     const [isPhotoModalOpen, setPhotoModalOpen] = useState<boolean>(false)
 
     useEffect(() => {
-        const galleryContainer = document.querySelector('.gallery-container')
+        const galleryContainer =
+            document.querySelector<Element>('.gallery-container')
         if (isPhotoModalOpen) {
             galleryContainer?.classList.add('photo-modal-open')
         } else {
@@ -26,11 +27,11 @@ const Gallery = () => {
         }
     }, [isPhotoModalOpen])
 
-    const handleClosePhotoModal = () => {
+    const handleClosePhotoModal = (): void => {
         setPhotoModalOpen(false)
     }
 
-    const handleTakePhoto = () => {
+    const handleTakePhoto = (): void => {
         setPhotoModalOpen(true)
     }
 
@@ -74,48 +75,3 @@ const Gallery = () => {
 }
 
 export default Gallery
-
-//<button onClick={handleGetPhotos}>Get Photos</button>
-//<button onClick={handleGetPhoto}>Get Photo</button>
-//<button onClick={handleCreatePhoto}>Create Photo</button>
-//<button onClick={handleSelectPhoto}>Select Photo</button>
-//<button onClick={handleUpdatePhoto}>Update Photo</button>
-//<button onClick={handleDeletePhoto}>Delete Photo</button>
-
-// const handleGetPhoto = async () => {
-//     try {
-//         const response = await dispatch(getPhoto('66e996575a846bc4f3089bcf'))
-//         console.log('Photo', response)
-//     } catch (error) {
-//         console.error('Error getting photo:', error)
-//     }
-// }
-
-// const handleCreatePhoto = async () => {
-//     try {
-//         const response = await dispatch(
-//             createPhoto({ photoUrl: 'test', note: 'test' })
-//         )
-//         console.log('Created photo', response)
-//     } catch (error) {
-//         console.error('Error creating photo:', error)
-//     }
-// }
-
-// const handleSelectPhoto = () => {
-//     dispatch(selectPhoto('66e9a0b05a846bc4f3089c42'))
-// }
-
-// const handleUpdatePhoto = async () => {
-//     try {
-//         const response = await dispatch(
-//             updatePhoto({
-//                 photoId: '66e9a0b05a846bc4f3089c42',
-//                 note: 'updating',
-//             })
-//         )
-//         console.log('Updated photo', response)
-//     } catch (error) {
-//         console.error('Error updating photo:', error)
-//     }
-// }
