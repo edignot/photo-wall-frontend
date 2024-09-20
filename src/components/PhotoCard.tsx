@@ -1,3 +1,5 @@
+import { IoMdClose } from 'react-icons/io'
+
 interface Photo {
     photoUrl: string
     note?: string
@@ -5,10 +7,18 @@ interface Photo {
 
 const PhotoCard = ({ photo }: { photo: Photo }) => {
     return (
-        <div className='photo-card'>
-            <img src={photo.photoUrl} alt='gallery photo' />
+        <>
+            <div className='photo-container'>
+                <button
+                    className='delete-photo-button'
+                    onClick={() => alert('hi')}
+                >
+                    <IoMdClose />
+                </button>
+                <img src={photo.photoUrl} alt='gallery photo' />
+            </div>
             {photo.note && <p className='photo-card-note'>{photo.note}</p>}
-        </div>
+        </>
     )
 }
 

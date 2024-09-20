@@ -54,9 +54,6 @@ const Gallery = () => {
                             alt='take photo'
                         />
                     </button>
-                    <button onClick={() => alert('delete')}>
-                        Delete Picture
-                    </button>
                 </div>
                 {loading && <p>Loading photos...</p>}
                 {error && <p>Error fetching photos!</p>}
