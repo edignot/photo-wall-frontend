@@ -4,7 +4,7 @@ import { AppDispatch } from '../state/store'
 import { deletePhoto, updatePhoto } from '../state/gallery/gallerySlice'
 import { IoMdClose } from 'react-icons/io'
 import ActionButtons from './ActionButtons'
-import EditableNote from './EditableNote'
+import Note from './Note'
 
 interface Photo {
     photoUrl: string
@@ -62,10 +62,7 @@ const PhotoCard = ({ photo }: { photo: Photo }) => {
                         <img src={photo.photoUrl} alt='photo card image' />
                     </div>
 
-                    <EditableNote
-                        note={photo.note}
-                        editNote={handleUpdateNote}
-                    />
+                    <Note note={photo.note} editNote={handleUpdateNote} />
                 </>
             ) : (
                 <ActionButtons

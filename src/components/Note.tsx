@@ -1,42 +1,42 @@
 import { useState, useRef, useEffect } from 'react'
 
-const EditableNote = ({
+const Note = ({
     note,
     editNote,
 }: {
-    note: string | undefined
+    note?: string
     editNote: (editedNote: string | undefined) => void
 }) => {
-    const [isEditing, setIsEditing] = useState<boolean>(false)
+    const [isEditMode, setEditMode] = useState<boolean>(false)
     const [editedNote, setEditedNote] = useState(note)
 
     const inputRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
-        if (isEditing && inputRef.current) {
+        if (isEditMode && inputRef.current) {
             inputRef.current.focus()
         }
-    }, [isEditing])
+    }, [isEditMode])
 
-    const handleDoubleClick = () => {
-        setIsEditing(true)
+    const handleDoubleClick = (): void => {
+        setEditMode(true)
     }
 
-    const handleBlur = () => {
-        setIsEditing(false)
+    const handleBlur = (): void => {
+        setEditMode(false)
         editNote(editedNote)
     }
 
-    const handleChange = (e) => {
-        setEditedNote(e.target.value)
+    const handleChange = (event): void => {
+        setEditedNote(event.target.value)
     }
 
     return (
         <div>
-            {isEditing ? (
+            {isEditMode ? (
                 <input
                     type='text'
-                    className='photo-note'
+                    className='note'
                     ref={inputRef}
                     value={editedNote}
                     placeholder={note}
@@ -45,11 +45,11 @@ const EditableNote = ({
                     onBlur={handleBlur}
                 />
             ) : note ? (
-                <p className='photo-note' onDoubleClick={handleDoubleClick}>
+                <p className='note' onDoubleClick={handleDoubleClick}>
                     {note}
                 </p>
             ) : (
-                <p className='photo-note' onDoubleClick={handleDoubleClick}>
+                <p className='note-empty' onDoubleClick={handleDoubleClick}>
                     Add note
                 </p>
             )}
@@ -57,4 +57,4 @@ const EditableNote = ({
     )
 }
 
-export default EditableNote
+export default Note

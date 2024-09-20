@@ -15,7 +15,7 @@ const ActionButtons = ({
 }: ActionButtonsProps) => {
     return (
         <div>
-            <p>{note}</p>
+            <p className='note'>{note}</p>
             <div className='action-btn-container'>
                 <button className='cancel-btn' onClick={onCancel}>
                     <IoMdClose />
