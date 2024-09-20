@@ -88,7 +88,7 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
                     id='photo-note'
                     value={note}
                     placeholder='add note'
-                    maxLength={40}
+                    maxLength={20}
                     onChange={handleNoteChange}
                 />
 

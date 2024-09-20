@@ -11,13 +11,15 @@ const PhotoConfirmationModal = ({
 }: PhotoConfirmationModalProps) => {
     return (
         <div className='photo-confirmation-modal'>
-            <p>Delete? </p>
-            <button className='' onClick={onClose}>
-                <IoMdClose />
-            </button>
-            <button className='' onClick={onConfirm}>
-                <IoMdCheckmark />
-            </button>
+            <p className='confirm-modal-note'>Delete photo?</p>
+            <div className=''>
+                <button className='cancel-button' onClick={onClose}>
+                    <IoMdClose />
+                </button>
+                <button className='confirm-button' onClick={onConfirm}>
+                    <IoMdCheckmark />
+                </button>
+            </div>
         </div>
     )
 }

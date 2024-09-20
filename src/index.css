@@ -74,7 +74,9 @@
     margin: 20px 20px 0px 20px;
 }
 
-.photo-card-note {
+.photo-card-note,
+.confirm-modal-note {
+    font-size: 1.2rem;
     color: #333333;
 }
 
@@ -112,7 +114,9 @@
 .remove-photo-button,
 .cancel-photo-button,
 .upload-photo-button,
-.delete-photo-button {
+.delete-photo-button,
+.cancel-button,
+.confirm-button {
     font-size: 50px;
     background-color: transparent;
     border: none;
@@ -149,7 +153,9 @@
 .remove-photo-button:hover,
 .cancel-photo-button:hover,
 .upload-photo-button:hover,
-.delete-photo-button:hover {
+.delete-photo-button:hover,
+.cancel-button:hover,
+.confirm-button:hover {
     transform: scale(1.1);
 }
 
@@ -158,11 +164,13 @@
     justify-content: space-around;
 }
 
-.cancel-photo-button {
+.cancel-photo-button,
+.cancel-button {
     color: #a60000;
 }
 
-.upload-photo-button {
+.upload-photo-button,
+.confirm-button {
     color: #008874;
 }
 

@@ -14,13 +14,13 @@ interface PhotoCardProps {
 }
 
 const PhotoCard = ({ photo, onDeletePhoto }: PhotoCardProps) => {
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
-    const handleDeletePhoto = () => {
+    const handleDeletePhoto = (): void => {
         setIsModalOpen((prevState) => !prevState)
     }
 
-    const handleConfirmDelete = () => {
+    const handleConfirmDelete = (): void => {
         onDeletePhoto(photo._id)
         setIsModalOpen(false)
     }
