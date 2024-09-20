@@ -36,20 +36,11 @@ const Gallery = () => {
     return (
         <>
             <div className='gallery-container'>
-                <GalleryActions />
-                {/* <div className='gallery-actions'>
-                    <button
-                        className='take-photo-btn'
-                        onClick={handleTakePhoto}
-                    >
-                        <img
-                            src='../../src/assets/camera-icon.png'
-                            alt='take photo'
-                        />
-                    </button>
-                </div> */}
+                <GalleryActions takePhoto={handleTakePhoto} />
+
                 {loading && <p>Loading photos...</p>}
                 {error && <p>Error fetching photos!</p>}
+
                 {photos.length > 0 && (
                     <ul className='photo-grid'>
                         {photos
