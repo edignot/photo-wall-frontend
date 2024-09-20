@@ -1,12 +1,11 @@
 import { useState, useRef, useEffect } from 'react'
 
-const Note = ({
-    note,
-    editNote,
-}: {
+interface NoteProps {
     note?: string
     editNote: (editedNote: string | undefined) => void
-}) => {
+}
+
+const Note = ({ note, editNote }: NoteProps) => {
     const [isEditMode, setEditMode] = useState<boolean>(false)
     const [editedNote, setEditedNote] = useState(note)
 
@@ -22,13 +21,19 @@ const Note = ({
         setEditMode(true)
     }
 
-    const handleBlur = (): void => {
-        setEditMode(false)
-        editNote(editedNote)
+    const handleEdit = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        setEditedNote(event.target.value)
     }
 
-    const handleChange = (event): void => {
-        setEditedNote(event.target.value)
+    const handleConfirmEdit = (
+        event:
+            | React.KeyboardEvent<HTMLInputElement>
+            | React.ChangeEvent<HTMLInputElement>
+    ): void => {
+        if (event.key === 'Enter' || event.type === 'blur') {
+            setEditMode(false)
+            editNote(editedNote)
+        }
     }
 
     return (
@@ -41,8 +46,9 @@ const Note = ({
                     value={editedNote}
                     placeholder={note}
                     maxLength={20}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    onChange={handleEdit}
+                    onKeyDown={handleConfirmEdit}
+                    onBlur={handleConfirmEdit}
                 />
             ) : note ? (
                 <p className='note' onDoubleClick={handleDoubleClick}>
