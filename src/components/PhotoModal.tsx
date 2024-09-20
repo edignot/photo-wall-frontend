@@ -55,7 +55,7 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
                 {!photoUploading && !url && (
                     <>
                         <button
-                            className='select-photo-button'
+                            className='select-photo-btn'
                             onClick={() => photoInputRef.current?.click()}
                         />
                         <input
@@ -73,7 +73,7 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
                     <>
                         <img src={url} alt='uploaded photo' />
                         <button
-                            className='remove-photo-button'
+                            className='remove-photo-btn'
                             onClick={() => setUrl('')}
                         >
                             <IoMdClose />
@@ -93,11 +93,11 @@ const PhotoModal: React.FC<PhotoModalProps> = ({ onClose }) => {
                 />
 
                 <div className='upload-photo-controls'>
-                    <button className='cancel-photo-button' onClick={onClose}>
+                    <button className='cancel-photo-btn' onClick={onClose}>
                         <IoMdClose />
                     </button>
                     <button
-                        className='upload-photo-button'
+                        className='upload-photo-btn'
                         type='submit'
                         disabled={!url}
                     >

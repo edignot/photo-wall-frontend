@@ -55,7 +55,7 @@ const Gallery = () => {
             <div className='gallery-container'>
                 <div className='gallery-controls'>
                     <button
-                        className='take-photo-button'
+                        className='take-photo-btn'
                         onClick={() => handleTakePhoto()}
                     >
                         <img

@@ -13,10 +13,10 @@ const PhotoConfirmationModal = ({
         <div className='photo-confirmation-modal'>
             <p className='confirm-modal-note'>Delete photo?</p>
             <div className=''>
-                <button className='cancel-button' onClick={onClose}>
+                <button className='cancel-btn' onClick={onClose}>
                     <IoMdClose />
                 </button>
-                <button className='confirm-button' onClick={onConfirm}>
+                <button className='confirm-btn' onClick={onConfirm}>
                     <IoMdCheckmark />
                 </button>
             </div>

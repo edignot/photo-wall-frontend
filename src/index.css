@@ -22,17 +22,17 @@
     margin: 20px;
 }
 
-.take-photo-button {
+.take-photo-btn {
     background-color: transparent;
     border: none;
     transition: transform 0.3s ease-in-out;
 }
 
-.take-photo-button:hover {
+.take-photo-btn:hover {
     transform: scale(1.1) rotate(-7deg);
 }
 
-.take-photo-button img {
+.take-photo-btn img {
     width: 100px;
 }
 
@@ -110,38 +110,38 @@
     position: relative;
 }
 
-.select-photo-button,
-.remove-photo-button,
-.cancel-photo-button,
-.upload-photo-button,
-.delete-photo-button,
-.cancel-button,
-.confirm-button {
+.select-photo-btn,
+.remove-photo-btn,
+.cancel-photo-btn,
+.upload-photo-btn,
+.delete-photo-btn,
+.cancel-btn,
+.confirm-btn {
     font-size: 50px;
     background-color: transparent;
     border: none;
     transition: transform 0.3s ease-in-out;
 }
 
-.delete-photo-button {
+.delete-photo-btn {
     position: absolute;
     top: 15px;
     right: 15px;
     color: #dfdfdf0a;
 }
 
-.delete-photo-button:hover {
+.delete-photo-btn:hover {
     color: #dfdfdf;
 }
 
-.remove-photo-button {
+.remove-photo-btn {
     position: absolute;
     top: 50px;
     right: 50px;
     color: #dfdfdf;
 }
 
-.select-photo-button {
+.select-photo-btn {
     width: 100px;
     height: 100px;
     background-image: url('../../src/assets/select-photo-icon.png');
@@ -149,13 +149,13 @@
     background-repeat: no-repeat;
 }
 
-.select-photo-button:hover,
-.remove-photo-button:hover,
-.cancel-photo-button:hover,
-.upload-photo-button:hover,
-.delete-photo-button:hover,
-.cancel-button:hover,
-.confirm-button:hover {
+.select-photo-btn:hover,
+.remove-photo-btn:hover,
+.cancel-photo-btn:hover,
+.upload-photo-btn:hover,
+.delete-photo-btn:hover,
+.cancel-btn:hover,
+.confirm-btn:hover {
     transform: scale(1.1);
 }
 
@@ -164,17 +164,17 @@
     justify-content: space-around;
 }
 
-.cancel-photo-button,
-.cancel-button {
+.cancel-photo-btn,
+.cancel-btn {
     color: #a60000;
 }
 
-.upload-photo-button,
-.confirm-button {
+.upload-photo-btn,
+.confirm-btn {
     color: #008874;
 }
 
-.upload-photo-button:disabled {
+.upload-photo-btn:disabled {
     color: #dfdfdf;
 }
 

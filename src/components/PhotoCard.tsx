@@ -31,7 +31,7 @@ const PhotoCard = ({ photo, onDeletePhoto }: PhotoCardProps) => {
                 <>
                     <div className='photo-container'>
                         <button
-                            className='delete-photo-button'
+                            className='delete-photo-btn'
                             onClick={handleDeletePhoto}
                         >
                             <IoMdClose />
