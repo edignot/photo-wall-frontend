@@ -34,8 +34,12 @@ const Note = ({ note, editNote }: NoteProps) => {
             ('key' in event && event.key === 'Enter') ||
             event.type === 'blur'
         ) {
-            setEditMode(false)
-            editNote(editedNote)
+            if (editedNote !== note) {
+                setEditMode(false)
+                editNote(editedNote)
+            } else {
+                setEditMode(false)
+            }
         }
     }
 
