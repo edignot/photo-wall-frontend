@@ -38,7 +38,8 @@ Photo Wall is a minimalistic app that allows users to create instant picture wal
     VITE_CLOUDINARY_CLOUD_NAME=<your_cloudinary_cloud_name>
     VITE_CLOUDINARY_UPLOAD_PRESET=<your_cloudinary_upload_preset>
     ```
-4. Run the development server:
+4. Have the Photo API server running locally: https://github.com/edignot/photo-wall-backend
+5. Run the development server:
     ```bash
     npm run dev
     ```
