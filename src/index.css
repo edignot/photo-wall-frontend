@@ -16,7 +16,7 @@
     text-align: center;
 }
 
-.gallery-controls {
+.gallery-actions {
     display: flex;
     justify-content: space-between;
     margin: 20px;
@@ -45,7 +45,7 @@
     margin: 0;
 }
 
-.photo-grid-item {
+.photo-card {
     width: 300px;
     height: 400px;
     background-color: #f0f0f0;
@@ -57,7 +57,7 @@
     flex-direction: column;
 }
 
-.photo-grid-item:hover {
+.photo-card:hover {
     transform: rotate(1deg);
 }
 
@@ -150,7 +150,7 @@
     transform: scale(1.1);
 }
 
-.action-btns {
+.action-btn-container {
     display: flex;
     justify-content: space-around;
 }
@@ -167,16 +167,20 @@
     color: #dfdfdf;
 }
 
-.photo-note,
-.confirm-modal-note {
-    padding: 5px;
+.note,
+.note-empty {
+    margin: 0;
+    padding: 5px 0;
     font-size: 1.2rem;
     text-align: center;
     border: none;
     text-wrap: wrap;
     word-break: break-all;
     color: #333333;
-    margin: 0;
+}
+
+.note-empty {
+    opacity: 0;
 }
 
 .upload-photo-loading {

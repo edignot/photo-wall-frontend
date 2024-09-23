@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, AppDispatch } from '../state/store'
 import { getPhotos } from '../state/gallery/gallerySlice'
+import GalleryActions from '../components/GalleryActions'
 import PhotoCard from '../components/PhotoCard'
 import PhotoModal from '../components/PhotoModal'
 
 const Gallery = () => {
     const dispatch = useDispatch<AppDispatch>()
+
     const { photos, loading, error } = useSelector(
         (state: RootState) => state.gallery
     )
@@ -27,30 +29,18 @@ const Gallery = () => {
         }
     }, [isPhotoModalOpen])
 
-    const handleClosePhotoModal = (): void => {
-        setPhotoModalOpen(false)
-    }
-
     const handleTakePhoto = (): void => {
-        setPhotoModalOpen(true)
+        setPhotoModalOpen(!isPhotoModalOpen)
     }
 
     return (
         <>
             <div className='gallery-container'>
-                <div className='gallery-controls'>
-                    <button
-                        className='take-photo-btn'
-                        onClick={() => handleTakePhoto()}
-                    >
-                        <img
-                            src='../../src/assets/camera-icon.png'
-                            alt='take photo'
-                        />
-                    </button>
-                </div>
+                <GalleryActions takePhoto={handleTakePhoto} />
+
                 {loading && <p>Loading photos...</p>}
                 {error && <p>Error fetching photos!</p>}
+
                 {photos.length > 0 && (
                     <ul className='photo-grid'>
                         {photos
@@ -58,10 +48,7 @@ const Gallery = () => {
                             .reverse()
                             .map((photo) => {
                                 return (
-                                    <li
-                                        key={photo._id}
-                                        className='photo-grid-item'
-                                    >
+                                    <li key={photo._id} className='photo-card'>
                                         <PhotoCard photo={photo} />
                                     </li>
                                 )
@@ -69,7 +56,7 @@ const Gallery = () => {
                     </ul>
                 )}
             </div>
-            {isPhotoModalOpen && <PhotoModal onClose={handleClosePhotoModal} />}
+            {isPhotoModalOpen && <PhotoModal onClose={handleTakePhoto} />}
         </>
     )
 }
