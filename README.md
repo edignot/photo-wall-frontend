@@ -2,7 +2,7 @@
 
 Photo Wall is a minimalistic app that allows users to create instant picture walls by uploading images. It offers a quick and easy way to build beautiful image collections with minimal setup, perfect for sharing a visual story.
 
-![App UI gif](https://res.cloudinary.com/ds6dxgvxo/image/upload/v1727117567/CleanShot_2024-09-23_at_12.51.49_yfivqw.gif)
+![CleanShot_2024-09-23_at_12 51 49_yfivqw](https://github.com/user-attachments/assets/c3457ae2-ae58-416a-b918-d96bf7b32598)
 
 ## Current Features (MVP)
 
