@@ -3,8 +3,11 @@ import axios from 'axios'
 export const uploadPhoto = async (photoFile: File) => {
     const photoData = new FormData()
     photoData.append('file', photoFile)
-    photoData.append('upload_preset', 'photo-wall')
-    photoData.append('cloud_name', 'ds6dxgvxo')
+    photoData.append(
+        'upload_preset',
+        import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
+    )
+    photoData.append('cloud_name', import.meta.env.VITE_CLOUDINARY_CLOUD_NAME)
 
     try {
         const response = await axios.post(
