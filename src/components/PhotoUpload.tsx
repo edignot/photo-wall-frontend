@@ -20,10 +20,15 @@ const PhotoUpload = ({ url, setUrl }: PhotoUploadProps) => {
             return
         }
 
-        setPhotoUploading(true)
-        const photoUrl = await uploadPhoto(photo)
-        setUrl(photoUrl)
-        setPhotoUploading(false)
+        try {
+            setPhotoUploading(true)
+            const photoUrl = await uploadPhoto(photo)
+            setUrl(photoUrl)
+        } catch (error) {
+            console.error('Error uploading photo:', error)
+        } finally {
+            setPhotoUploading(false)
+        }
     }
 
     return (
